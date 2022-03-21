@@ -1,1 +1,0 @@
-Put your training images in here.
