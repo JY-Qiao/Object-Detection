@@ -1,1 +1,0 @@
-Put your training xml files in here.

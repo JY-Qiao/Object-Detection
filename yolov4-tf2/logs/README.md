@@ -1,1 +1,0 @@
-Generate weights saved .h5 file in here.
