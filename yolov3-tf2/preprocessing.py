@@ -27,13 +27,15 @@ def get_parse(xml_path, input_size):
     return labels, boxes
 
 def get_IOU(true_box, anchor_box):
-    width = min(true_box[1], anchor_box[1]) - true_box[0]
-    height = min(true_box[3], anchor_box[3]) - true_box[2]
-    intersect = width * height
-    merge = (true_box[1] - true_box[0]) * (true_box[3] - true_box[2]) + (anchor_box[1] - anchor_box[0]) * (anchor_box[3] - anchor_box[2])
-    IOU =intersect / (merge - intersect)
-
-    return IOU
+    width = min(true_box[1], anchor_box[1]) - max(true_box[0], anchor_box[0])
+    height = min(true_box[3], anchor_box[3]) - max(true_box[2], anchor_box[2])
+    if width < 0 or height < 0:
+        return 0
+    else:
+        intersect = width * height
+        merge = (true_box[1] - true_box[0]) * (true_box[3] - true_box[2]) + (anchor_box[1] - anchor_box[0]) * (anchor_box[3] - anchor_box[2])
+        IOU = intersect / (merge - intersect)
+        return IOU
 
 def get_anchor(anchors, box):
     IOU_list = []
